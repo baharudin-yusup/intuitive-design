@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -7,12 +8,14 @@ import '../function/size.dart';
 
 class IntuitiveSplash extends StatelessWidget {
   final Widget icon;
+  final Widget darkIcon;
   final String logoTitle;
   final Future<Widget> Function() function;
 
   final bool showFooter;
   final String? footerTitle;
   final Widget? footerIcon;
+  final Widget? darkFooterIcon;
 
   const IntuitiveSplash(
       {Key? key,
@@ -21,25 +24,25 @@ class IntuitiveSplash extends StatelessWidget {
       this.footerTitle,
       this.footerIcon,
       required this.icon,
-      this.logoTitle = ''})
-      : assert((footerTitle == null || footerIcon != null), "Need icon if use footer title"),
+      Widget? darkIcon,
+      this.logoTitle = '',
+      Widget? darkFooterIcon})
+      : darkIcon = darkIcon ?? icon,
+        darkFooterIcon = darkFooterIcon ?? footerIcon,
+        assert((footerTitle == null || footerIcon != null), "Need icon if use footer title"),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // late String footerIconPath;
-    // switch (footerIcon) {
-    //   case SplashIcon.appleDeveloperAcademy:
-    //     footerIconPath = 'assets/apple-developer-academy.png';
-    //     break;
-    //   case SplashIcon.empty:
-    //     footerIconPath = '';
-    //     break;
-    // }
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    final brightness = MediaQuery.of(context).platformBrightness;
+    final isLightMode = brightness == Brightness.light;
 
     return AnimatedSplashScreen.withScreenFunction(
       centered: true,
-      backgroundColor: Colors.white,
+      backgroundColor: colorScheme.background,
       splashIconSize: IntuitiveSize.maxHeight(context),
       splash: Stack(
         alignment: AlignmentDirectional.center,
@@ -50,14 +53,14 @@ class IntuitiveSplash extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  icon,
+                  isLightMode ? icon : darkIcon,
                   if (logoTitle.isNotEmpty) ...[
                     const SizedBox(
                       width: 5,
                     ),
                     Text(
                       logoTitle,
-                      style: const TextStyle(fontSize: 15, color: Colors.black),
+                      style: textTheme.titleSmall,
                     ),
                   ],
                 ],
@@ -65,10 +68,10 @@ class IntuitiveSplash extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              const SpinKitDualRing(
-                color: Colors.black,
+              SpinKitDualRing(
+                color: isLightMode ? Colors.black : Colors.white,
                 size: 25,
-                lineWidth: 1.5,
+                lineWidth: 1.75,
               ),
             ],
           ),
@@ -83,13 +86,13 @@ class IntuitiveSplash extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 10),
                       child: Text(
                         footerTitle!,
-                        style: TextStyle(color: Colors.black.withOpacity(0.5)),
+                        style: textTheme.bodySmall,
                       ),
                     ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      if (footerIcon != null) footerIcon!,
+                      if (footerIcon != null) isLightMode ? footerIcon! : darkFooterIcon!,
                     ],
                   )
                 ],
