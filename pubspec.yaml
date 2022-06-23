@@ -1,6 +1,6 @@
 name: intuitive_design
 description: A Flutter intuitive design library
-version: 0.1.4
+version: 0.1.9
 homepage: https://github.com/baharudin-yusup/intuitive-design
 
 environment:
@@ -13,6 +13,7 @@ dependencies:
   animated_splash_screen: ^1.1.0
   flutter_spinkit: ^5.1.0
   page_transition: ^2.0.5
+  google_fonts: 2.1.1
 
 dev_dependencies:
   flutter_test:

@@ -90,7 +90,7 @@ class StringInput extends StatelessWidget {
   Widget _buildTitle(BuildContext context) {
     if (title.isEmpty) return const SizedBox();
     return Padding(
-      padding: const EdgeInsets.only(bottom: WidgetConstant.minorSpacing),
+      padding: const EdgeInsets.only(bottom: IntuitiveConstant.minorSpacing),
       child: Text(
         title,
         style: Theme.of(context).textTheme.subtitle1,
