@@ -3,11 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'constant.dart';
 
-class VenraTheme {
+class IntuitiveTheme {
   final ColorScheme _light;
   final ColorScheme _dark;
 
-  VenraTheme({
+  IntuitiveTheme({
     ColorScheme? light,
     ColorScheme? dark,
     Color? fallbackLightColor,
