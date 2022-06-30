@@ -1,6 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -29,7 +28,6 @@ class IntuitiveSplash extends StatelessWidget {
       Widget? darkFooterIcon})
       : darkIcon = darkIcon ?? icon,
         darkFooterIcon = darkFooterIcon ?? footerIcon,
-        assert((footerTitle == null || footerIcon != null), "Need icon if use footer title"),
         super(key: key);
 
   @override

@@ -4,26 +4,26 @@ import 'package:google_fonts/google_fonts.dart';
 import 'constant.dart';
 
 class IntuitiveTheme {
-  final ColorScheme _light;
-  final ColorScheme _dark;
+  final ColorScheme lightColorScheme;
+  final ColorScheme darkColorScheme;
 
   IntuitiveTheme({
     ColorScheme? light,
     ColorScheme? dark,
     Color? fallbackLightColor,
     Color? fallbackDarkColor,
-  })  : _light = light ??
+  })  : lightColorScheme = light ??
             ColorScheme.fromSeed(
                 seedColor: fallbackLightColor ?? const Color(0xff424242),
                 brightness: Brightness.light),
-        _dark = dark ??
+        darkColorScheme = dark ??
             ColorScheme.fromSeed(
                 seedColor: fallbackDarkColor ?? const Color(0xff424242),
                 brightness: Brightness.dark);
 
-  ThemeData get lightTheme => _getData(_light, _dark);
+  ThemeData get lightTheme => _getData(lightColorScheme, darkColorScheme);
 
-  ThemeData get darkTheme => _getData(_dark, _light);
+  ThemeData get darkTheme => _getData(darkColorScheme, lightColorScheme);
 
   ThemeData _getData(ColorScheme colorScheme, ColorScheme colorSchemeInvert) {
     final base = ThemeData(colorScheme: colorScheme);
@@ -44,22 +44,13 @@ class IntuitiveTheme {
       primaryTextTheme: textThemeInvert,
       navigationBarTheme: NavigationBarThemeData(
           labelTextStyle: MaterialStateProperty.all<TextStyle>(textTheme.subtitle1!)),
-      // bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      //   selectedLabelStyle: textTheme.bodyText1,
-      //   unselectedLabelStyle: textTheme.bodyText1,
-      // ),
       appBarTheme: AppBarTheme(
-        titleTextStyle: textTheme.titleMedium,
-        iconTheme: IconThemeData(
-          color: colorScheme.primary,
-        ),
-        backgroundColor: colorScheme.surface,
+        elevation: 2,
+        backgroundColor: colorScheme.background,
+        iconTheme: IconThemeData(color: colorScheme.onBackground),
+        centerTitle: false,
+        titleTextStyle: TextStyle(color: colorScheme.onBackground),
         titleSpacing: IntuitiveConstant.appBarSpacing,
-        // titleTextStyle: h6,
-        // toolbarTextStyle: b1.copyWith(color: Colors.black),
-        centerTitle: true,
-        elevation: 0.5,
-        // backgroundColor: Colors.white,
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         extendedSizeConstraints: const BoxConstraints(minHeight: 50, maxHeight: 50),
@@ -80,8 +71,7 @@ class IntuitiveTheme {
           // elevation: 0.0,
         ),
       ),
-      dividerTheme:
-          DividerThemeData(space: 5, thickness: 5, color: colorScheme.shadow.withOpacity(0.06)),
+      dividerTheme: const DividerThemeData(space: 5, thickness: 5, color: Colors.transparent),
       pageTransitionsTheme: const PageTransitionsTheme(builders: {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
@@ -96,18 +86,20 @@ class IntuitiveTheme {
               Radius.circular(IntuitiveConstant.radius),
             ),
           ),
-          // primary: primary,
           textStyle: textTheme.titleSmall,
         ),
       ),
-      listTileTheme: const ListTileThemeData(
-          // selectedTileColor: _colorScheme.secondaryContainer,
-          // tileColor: Colors.white,
-          // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-          // selectedColor: Colors.white,
-          // textColor: Colors.black,
-          ),
       iconTheme: const IconThemeData(size: 22.5),
+      cardTheme: CardTheme(
+        elevation: 2,
+        color: colorScheme.surface,
+        margin: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(IntuitiveConstant.radius),
+        ),
+      ),
+      tabBarTheme:
+          TabBarTheme(labelColor: colorScheme.primary, unselectedLabelColor: colorScheme.secondary),
     );
   }
 }
