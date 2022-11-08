@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../function/size.dart';
+import '../functions/size.dart';
 
 class IntuitiveSplash extends StatelessWidget {
   final Widget icon;
@@ -90,7 +90,8 @@ class IntuitiveSplash extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      if (footerIcon != null) isLightMode ? footerIcon! : darkFooterIcon!,
+                      if (footerIcon != null)
+                        isLightMode ? footerIcon! : darkFooterIcon!,
                     ],
                   )
                 ],

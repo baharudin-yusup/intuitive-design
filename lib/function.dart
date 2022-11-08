@@ -1,3 +1,3 @@
-export 'src/function/constant.dart';
-export 'src/function/size.dart';
-export 'src/function/theme.dart';
+export 'src/functions/constant.dart';
+export 'src/functions/size.dart';
+export 'src/functions/theme.dart';

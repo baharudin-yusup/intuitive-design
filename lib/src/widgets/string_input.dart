@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../function/constant.dart';
+import '../functions/constant.dart';
 
 enum StringInputType {
   short,

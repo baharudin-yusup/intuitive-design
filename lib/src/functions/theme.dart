@@ -27,8 +27,7 @@ class IntuitiveTheme {
 
   ThemeData _getData(ColorScheme colorScheme, ColorScheme colorSchemeInvert) {
     final base = ThemeData(colorScheme: colorScheme);
-    final textTheme =
-        GoogleFonts.robotoTextTheme(ThemeData(colorScheme: colorScheme).textTheme).copyWith(
+    final textTheme = GoogleFonts.robotoTextTheme(base.textTheme).copyWith(
       caption: GoogleFonts.roboto(fontSize: 9),
     );
 
@@ -37,7 +36,7 @@ class IntuitiveTheme {
       caption: GoogleFonts.roboto(fontSize: 9),
     );
 
-    return ThemeData(
+    return base.copyWith(
       colorScheme: colorScheme,
       textTheme: textTheme,
       primaryIconTheme: IconThemeData(color: colorSchemeInvert.onPrimary),
